@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success"
+    (click)="onNewExoTemplate()"
+    >New ExoTemplate</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+
+  <div class="col-xs-12">
+    <app-exo-template-item
+      *ngFor="let exoTemplateEl of exoTemplates; let i = index"
+      [exoTemplate]="exoTemplateEl" [index]="i"
+        >
+    </app-exo-template-item>
+  </div>
+
+</div>
