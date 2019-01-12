@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ExoTemplate } from '../recipe.model';
+import { ExoTemplate } from '../ExoTemplate.model';
 import { ExoTemplateService } from '../exo-template.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';

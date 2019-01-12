@@ -1,5 +1,5 @@
 import {Input, Component, OnInit } from '@angular/core';
-import { ExoTemplate } from '../recipe.model';
+import { ExoTemplate } from '../ExoTemplate.model';
 import { SeanceTemplateService } from '../../template-seance/seance-template.service';
 import { ExoTemplateService } from '../exo-template.service';
 import { Router, ActivatedRoute, Data, Params } from '@angular/router';
@@ -36,6 +36,6 @@ export class ExoTemplateDetailComponent implements OnInit {
   }
 
   onEdit() {
-    this.router.navigate(['edit'], {relativeTo : this.activatedRoute} );
+      this.router.navigate(['edit'], {relativeTo: this.activatedRoute});
   }
 }

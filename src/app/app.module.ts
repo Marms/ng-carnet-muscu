@@ -8,8 +8,8 @@ import { ExoTemplateListComponent } from './template-exo/exo-template-list/exo-t
 import { ExoTemplateComponent } from './template-exo/exo-template.component';
 import { ExoTemplateDetailComponent } from './template-exo/exo-template-detail/exo-template-detail.component';
 import { ExoTemplateItemComponent } from './template-exo/exo-template-list/exo-template-item/exo-template-item.component';
-import { ShoppingListComponent } from './template-seance/seance-template.component';
-import { SeanceTemplateComponent } from './template-seance/seance-template-edit/seance-template.component';
+import { SeanceTemplateComponent } from './template-seance/seance-template.component';
+import { SeanceTemplateEditComponent } from './template-seance/seance-template-edit/seance-template-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ExoTemplateService } from './template-exo/exo-template.service';
 import { SeanceTemplateService } from './template-seance/seance-template.service';
@@ -18,6 +18,8 @@ import { ExoTemplateEditComponent } from './template-exo/exo-template-edit/exo-t
 import { ExoTemplateStartComponent } from './template-exo/exo-template-start/exo-template-start.component';
 import { SeanceTemplateListComponent } from './template-seance/seance-template-list/seance-template-list.component';
 import { SeanceTemplateItemComponent } from './template-seance/seance-template-list/seance-template-item/seance-template-item.component';
+import { SeanceTemplateDetailComponent } from './template-seance/seance-template-detail/seance-template-detail.component';
+import { FilterByNamePipe } from './template-seance/seance-template-edit/filter-by-name.pipe';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,16 @@ import { SeanceTemplateItemComponent } from './template-seance/seance-template-l
     ExoTemplateComponent,
     ExoTemplateDetailComponent,
     ExoTemplateItemComponent,
-    ShoppingListComponent,
     SeanceTemplateComponent,
+    SeanceTemplateEditComponent,
     DropdownDirective,
     ExoTemplateEditComponent,
     ExoTemplateStartComponent,
     SeanceTemplateListComponent,
     SeanceTemplateItemComponent,
+    SeanceTemplateDetailComponent,
+    TemplatePipe,
+    FilterByNamePipe,
   ],
   imports: [
     BrowserModule,

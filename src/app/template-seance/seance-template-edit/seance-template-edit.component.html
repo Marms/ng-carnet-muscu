@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="slForm" (ngSubmit)="onSubmitItem()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button [disabled]="slForm.invalid" class="btn-success btn" type="submit">
+            {{editMode ? 'Update': 'Add'}}
+          </button>
+          <button class="btn-danger btn" type="button"
+                  *ngIf="editMode"
+                  (click)="onDeleteButton()">Delete
+          </button>
+          <button class="btn-primary btn" type="button" (click)="onClearButton()">Clear</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label for="name">Name</label>
+          <input class="form-control"
+                 type="text"
+                 id="name"
+                 formControlName="name"
+          />
+        </div>
+
+        <div class="col-sm-2 form-group">
+          <label for="comment">Comment</label>
+          <textarea
+            class="form-control"
+            id="comment"
+            name="comment"
+            formControlName="comment"
+          ></textarea>
+        </div>
+      </div>
+      <div class="row" formArrayName="exoTemplateList"
+           *ngFor="let exoItem of slForm.get('exoTemplateList').controls; let i = index"
+      >
+        <div class="col-xs-12" [formGroupName]="i">
+          <div class="row">
+            <div class="col-xs-10">
+              <app-exo-template-item [exoTemplate]="mapFormGroupToExoTemplate(exoItem)" [index]="i"
+                                     [desactivateRoute]="true"></app-exo-template-item>
+            </div>
+            <div class="col-xs-2">
+              <button class="btn btn-warning" (click)="removeItem(i)">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- afficher la liste des exercices avec un Pipe qui n'affiche pas le l'exo présent dans scTemplate-->
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="row"
+             *ngFor="let exoTpl of exoTplList | filterByName:slForm.get('exoTemplateList'); let i=index"
+        >
+          <div class="col-xs-10">
+            <app-exo-template-item [exoTemplate]="exoTpl" [index]="i" [desactivateRoute]="true"></app-exo-template-item>
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-primary" (click)="addToExoList(exoTpl)">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

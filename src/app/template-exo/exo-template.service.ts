@@ -1,4 +1,4 @@
-import { ExoTemplate } from './recipe.model';
+import { ExoTemplate } from './ExoTemplate.model';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { SeanceTemplateService } from '../template-seance/seance-template.service';

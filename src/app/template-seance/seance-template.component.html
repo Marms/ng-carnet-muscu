@@ -1,17 +1,29 @@
 <div class="row">
-  ´<div class="col-xs-10">
-        <app-shopping-edit
-          [ingredient]="ingredient"
-        ></app-shopping-edit>
-        <hr>
-        <ul class="list-group">
-          <a 
-            class="list-group-item" 
-            style="cursor: pointer" (click)="onEditItem(i)"
-            *ngFor="let ingredient of ingredients; let i = index" (click)="onClickIngredientItem(ingredient)">
-              {{ ingredient.name}} {{ ingredient.amount}}
-              
-            </a>
-        </ul>
+
+  <div class="col-md-5">
+    <app-seance-template-list></app-seance-template-list>
   </div>
+  <div class="col-md-7">
+    <router-outlet></router-outlet>
+    <div #infoText>Please select seance</div>
+  </div>
+
+<!--
+  <div class="col-xs-10">
+    <app-shopping-edit
+      [ingredient]="ingredient"
+    ></app-shopping-edit>
+    <hr>
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer" (click)="onEditItem(i)"
+        *ngFor="let ingredient of ingredients; let i = index" (click)="onClickIngredientItem(ingredient)">
+        {{ ingredient.name}} {{ ingredient.amount}}
+
+      </a>
+    </ul>
+  </div>
+
+ -->
 </div>

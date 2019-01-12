@@ -1,42 +1,79 @@
-import { Ingredient } from "../shared/ingredient.model";
-import { EventEmitter } from "@angular/core";
-import { Subject } from "rxjs/Subject";
-
+import {Ingredient} from '../shared/ingredient.model';
+import {EventEmitter, OnInit} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
+import {ScTemplate} from './scTemplate.model';
+import {ExoTemplate} from '../template-exo/ExoTemplate.model';
 
 export class SeanceTemplateService {
-    ingredientsChanged = new Subject <Ingredient[]>();
-    startedEditing = new Subject<number>();
+  inqredientsChanged = new Subject<Ingredient[]>();
+  scTemplatesChanged = new Subject<ScTemplate[]>();
+  startedEditing = new Subject<number>();
 
-    private ingredients: Ingredient[] = [
-        new Ingredient('Apples', 5),
-        new Ingredient('Tomatoes', 10)];
+  private ingredients: Ingredient[] = [ // TODO delete
+    new Ingredient('Apples', 5),
+    new Ingredient('Tomatoes', 10)];
 
-    getIngredients() {
-        return this.ingredients.slice();
-    }
 
-    getIngredient(index: number) {
-        return this.ingredients[index];
-    }
+  private seanceTemplates: ScTemplate[] = [
+    new ScTemplate('Full body', 'Pas le temps de niaser', ''),
+    new ScTemplate('Jambes Hardcore', 'harcore!!!!', '')
+  ];
 
-    pushIngredients(ing : Ingredient) {
-        this.ingredients.push(ing);
-        this.ingredientsChanged.next(this.ingredients);
-    }
+  getIngredients() {
+    return this.ingredients.slice();
+  }
 
-    pushAllIngredients(ings : Ingredient[]) {
-        console.log('pushall');
-        this.ingredients.push(...ings);
-        this.ingredientsChanged.next(this.ingredients);
-    }
+  getSeanceTemplates() {
+    return this.seanceTemplates;
+  }
 
-    updateIngredient(index: number, newIngredient : Ingredient) {
-        this.ingredients[index] = newIngredient;
-        this.ingredientsChanged.next(this.ingredients.slice());
-    }
+  getSeanceTemplate(index: number) {
+    return this.seanceTemplates[index];
+  }
 
-    deleteIngredient(index: number) {
-        this.ingredients.splice(index, 1);
-        this.ingredientsChanged.next(this.ingredients.slice());
-    }
+  pushSeanceTemplate(sc: ScTemplate) {
+    this.seanceTemplates.push(sc);
+    this.scTemplatesChanged.next(this.seanceTemplates);
+
+  }
+
+  updateSeanceTemplate(index: number, updatedScTpl: ScTemplate) {
+    this.seanceTemplates[index] = updatedScTpl;
+    this.scTemplatesChanged.next(this.seanceTemplates);
+  }
+
+  pushAllSeanceTemplates(scs: ScTemplate[]) {
+    this.seanceTemplates.push(...scs);
+    this.scTemplatesChanged.next(this.seanceTemplates);
+  }
+
+  deleteSeanceTemplate(index: number) {
+    this.seanceTemplates.splice(index, 1);
+    this.scTemplatesChanged.next(this.seanceTemplates);
+  }
+
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+
+  pushIngredients(ing: Ingredient) {
+    this.ingredients.push(ing);
+    this.inqredientsChanged.next(this.ingredients);
+  }
+
+  pushAllIngredients(ings: Ingredient[]) {
+    console.log('pushall');
+    this.ingredients.push(...ings);
+    this.inqredientsChanged.next(this.ingredients);
+  }
+
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    this.ingredients[index] = newIngredient;
+    this.inqredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.inqredientsChanged.next(this.ingredients.slice());
+  }
 }

@@ -1,3 +1,16 @@
-<p>
-  seance-template-list works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success"
+    (click)="onNewSeanceTemplate()"
+    >New Seance Template</button>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+   <app-exo-template-item
+    *ngFor="let scItem of scTemplateList; let i = index"
+    [exoTemplate]="scItem" [index]="i"
+   ></app-exo-template-item>
+  </div>
+</div>

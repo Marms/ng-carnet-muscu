@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExoTemplate } from './recipe.model';
+import { ExoTemplate } from './ExoTemplate.model';
 import { ExoTemplateService } from './exo-template.service';
 
 @Component({

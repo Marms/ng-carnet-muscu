@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ExoTemplateService } from '../exo-template.service';
-import { ExoTemplate } from '../recipe.model';
+import { ExoTemplate } from '../ExoTemplate.model';
 import { FormGroup, FormControlName, FormControl, FormArray, Validators } from '@angular/forms';
 import { Ingredient } from '../../shared/ingredient.model';
 
@@ -68,7 +68,7 @@ export class ExoTemplateEditComponent implements OnInit {
     if (this.editMode) {
     return this.recipeSvc.getRecipe(this.id);
     }
-    return new ExoTemplate('', '', '', ['']);
+    return new ExoTemplate('', '', '', [''] );
   }
 
 /*
