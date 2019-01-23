@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success"
+    >Add exercice</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+
+  <div class="col-xs-12">
+    <app-exercise-item
+      *ngFor="let exo of exerciseList; let i = index"
+      [exo]="exo" [index]="i"
+    >
+    </app-exercise-item>
+  </div>
+  <div class="col-xs-12">
+
+  </div>
+</div>

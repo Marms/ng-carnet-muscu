@@ -1,0 +1,53 @@
+<div class="row">
+  <h2>{{exercise.template.name}}</h2>
+</div>
+<img src="{{exercise.template.imagePath}}" alt="" class="img-responsive" style="max-height: 200px;">
+<div class="row">
+  <div class="col-xs-12">
+    <button (click)="onSave()" class="btn btn-success">Save</button>
+    <button (click)="onDelete()" class="btn btn-danger">Delete</button>
+  </div>
+</div>
+
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="form-row">
+          <label for="nbrepeat" class="control-label">Nombre de répetition:</label>
+          <input id="nbrepeat" type="text" class="form-control" formControlName="repetition">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-row">
+          <label for="poids" class="control-label">Poids:</label>
+          <input id="poids" type="text" class="form-control" formControlName="weight">
+        </div>
+      </div>
+      <div class="form-row">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="list-group">
+    <div class="col-xs-3" *ngFor="let serie of exercise.series; let i = index">
+      <a
+        (click)="onSerieSelected(i)"
+        routerLinkActive="active"
+        style="cursor: pointer"
+        class="list-group-item clearfix">
+        <div class="pull-left">
+          <p class="list-group-item-text">{{serie.repetition}} * {{serie.weight}} KG</p>
+        </div>
+        <span class="pull-right">
+    </span>
+      </a>
+    </div>
+  </div>
+</div>
+<hr/>

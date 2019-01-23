@@ -27,7 +27,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.exoTplList = this.exoTemplateSvc.getExoTemplate();
+    this.exoTplList = this.exoTemplateSvc.getExoTemplates();
     this.seanceTpl = new ScTemplate('', '', '');
     this.activeRoute.params.subscribe(
       (param: Params) => {

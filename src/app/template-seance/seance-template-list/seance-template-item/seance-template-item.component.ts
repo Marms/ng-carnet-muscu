@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ScTemplate} from '../../scTemplate.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 /**
  * Component prend en input un item de type scTemplate et un index
@@ -14,8 +15,20 @@ export class SeanceTemplateItemComponent implements OnInit {
 
   @Input('scTemplate') scTemplate: ScTemplate;
   @Input('index') index: number; // index dans la liste
-  constructor() { }
+  @Input('desactivateRoute') isRouteDeactivate;
 
-  ngOnInit() {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
 
+  ngOnInit() {
+//    this.isRouteDeactivate = false;
+  }
+
+
+  onRoute() {
+    if (!this.isRouteDeactivate) {
+      this.router.navigate([this.index], {relativeTo: this.activatedRoute});
+
+    }
+  }
 }

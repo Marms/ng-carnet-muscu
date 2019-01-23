@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-12">
+
+
+    <app-exo-template-item (click)="selected(i)"
+                              *ngFor="let scItem of scTemplateList; let i = index"
+                              [exoTemplate]="scItem"
+                              [index]="i"
+                              [desactivateRoute]=true
+    ></app-exo-template-item>
+    <!-- -->
+  </div>
+</div>

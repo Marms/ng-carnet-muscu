@@ -9,19 +9,12 @@ export class SeanceTemplateService {
   scTemplatesChanged = new Subject<ScTemplate[]>();
   startedEditing = new Subject<number>();
 
-  private ingredients: Ingredient[] = [ // TODO delete
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10)];
-
 
   private seanceTemplates: ScTemplate[] = [
     new ScTemplate('Full body', 'Pas le temps de niaser', ''),
     new ScTemplate('Jambes Hardcore', 'harcore!!!!', '')
   ];
 
-  getIngredients() {
-    return this.ingredients.slice();
-  }
 
   getSeanceTemplates() {
     return this.seanceTemplates;
@@ -50,30 +43,5 @@ export class SeanceTemplateService {
   deleteSeanceTemplate(index: number) {
     this.seanceTemplates.splice(index, 1);
     this.scTemplatesChanged.next(this.seanceTemplates);
-  }
-
-  getIngredient(index: number) {
-    return this.ingredients[index];
-  }
-
-  pushIngredients(ing: Ingredient) {
-    this.ingredients.push(ing);
-    this.inqredientsChanged.next(this.ingredients);
-  }
-
-  pushAllIngredients(ings: Ingredient[]) {
-    console.log('pushall');
-    this.ingredients.push(...ings);
-    this.inqredientsChanged.next(this.ingredients);
-  }
-
-  updateIngredient(index: number, newIngredient: Ingredient) {
-    this.ingredients[index] = newIngredient;
-    this.inqredientsChanged.next(this.ingredients.slice());
-  }
-
-  deleteIngredient(index: number) {
-    this.ingredients.splice(index, 1);
-    this.inqredientsChanged.next(this.ingredients.slice());
   }
 }

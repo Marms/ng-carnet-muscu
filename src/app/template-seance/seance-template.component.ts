@@ -9,27 +9,13 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./seance-template.component.css']
 })
 export class SeanceTemplateComponent implements OnInit, OnDestroy {
-  ingredients: Ingredient[] = this.shopSvc.getIngredients();
-  ingredient: Ingredient = new Ingredient('', 0);
-  ingredientSubscription: Subscription;
 
   constructor(private shopSvc: SeanceTemplateService) {
   }
 
   ngOnInit() {
-    this.ingredients = this.shopSvc.getIngredients();
-    this.ingredientSubscription = this.shopSvc.inqredientsChanged.subscribe(
-      (ing: Ingredient[]) => {
-        this.ingredients = ing;
-      }
-    );
   }
 
   ngOnDestroy() {
-    this.ingredientSubscription.unsubscribe();
-  }
-
-  onClickIngredientItem(ingredient) {
-    this.ingredient = ingredient;
   }
 }

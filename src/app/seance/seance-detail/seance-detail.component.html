@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xs-12">
+    <img src="{{seance.template.imagePath}}" alt="" class="img-responsive">
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>{{seance.template.name}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12"><span>{{seance.template.comment}}</span></div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-xs-12">
+    <div
+      *ngFor="let exoItem of seance.template.exoTemplateList | filterExoList:seance.exercises; let i = index">
+      <app-exo-template-item
+        (click)="onAddExercise(i)"
+        [index]="i"
+        [exoTemplate]="exoItem"
+        [desactivateRoute]="true"></app-exo-template-item>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div
+      *ngFor="let exoItem of seance.exercises; let i = index">
+      <app-exo-template-item
+        (click)="onEditExercise(exoItem.template.name)"
+        [index]="i"
+        [exoTemplate]="exoItem.template"
+        [desactivateRoute]="true"></app-exo-template-item>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="btn-group" appDropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle">Manage Seance <span
+        class="carret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a (click)="onEdit()" style="cursor: pointer">Edit Seance</a></li>
+        <li><a (click)="onDelete()">Delete Seance</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>

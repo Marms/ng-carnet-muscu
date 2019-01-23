@@ -20,7 +20,7 @@ export class ExoTemplateDetailComponent implements OnInit {
       (data: Params) => {
         this.id = +data['id'];
         console.log(this.id)
-        this.exoTemplate = this.recSvc.getRecipe(this.id);
+        this.exoTemplate = this.recSvc.getExoTemplate(this.id);
       }
     );
   }

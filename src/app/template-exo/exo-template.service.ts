@@ -21,20 +21,17 @@ export class ExoTemplateService {
 
     constructor(private shopSvc: SeanceTemplateService) {}
 
-    getExoTemplate() {
+    getExoTemplates() {
         return this.exoTemplate.slice(); // retourne une copie du tableau
     }
 
-    getRecipe(id: number): ExoTemplate {
+    getExoTemplate(id: number): ExoTemplate {
         return this.exoTemplate[id];
     }
 
     deleteExoTemplate(id: number) {
        this.exoTemplate.splice(id, 1);
        this.exoTemplateChanged.next(this.exoTemplate);
-    }
-    addToShoppingList(ings: Ingredient[]) {
-        this.shopSvc.pushAllIngredients(ings);
     }
 
     addExoTemplate(recipe: ExoTemplate) {

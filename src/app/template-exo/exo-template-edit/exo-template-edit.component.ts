@@ -66,7 +66,7 @@ export class ExoTemplateEditComponent implements OnInit {
   }
   getRecipe(): ExoTemplate {
     if (this.editMode) {
-    return this.recipeSvc.getRecipe(this.id);
+    return this.recipeSvc.getExoTemplate(this.id);
     }
     return new ExoTemplate('', '', '', [''] );
   }
