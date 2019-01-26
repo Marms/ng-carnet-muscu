@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SeanceService} from '../seance.service';
 import {Seance} from '../seance.model';
 import {Subscription} from 'rxjs/Subscription';
+import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-seance-list',
@@ -12,7 +13,8 @@ export class SeanceListComponent implements OnInit {
 
   seances: Seance[];
   seanceChangedSubscription: Subscription;
-  constructor(private seanceSVC: SeanceService) {
+  constructor(private seanceSVC: SeanceService,
+              private dataSvc: DataStorageService) {
   }
 
   ngOnInit() {
@@ -23,5 +25,10 @@ export class SeanceListComponent implements OnInit {
       }
     );
   }
+
+  onSave() {
+    this.dataSvc.onSaveSeances();
+  }
+
 
 }

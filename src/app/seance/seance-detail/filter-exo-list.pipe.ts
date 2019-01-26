@@ -15,6 +15,9 @@ import {Exercise} from '../exercise/exercise.model';
 export class FilterExoListPipe implements PipeTransform {
 
   transform(value: ExoTemplate[], list: Exercise[]) {
+    if (value == null) {
+      return [];
+    }
     return this.filterArray(value, list);
   }
 

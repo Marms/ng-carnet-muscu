@@ -13,6 +13,7 @@
 </div>
 <div class="row">
   <div class="col-xs-12">
+    <h3 *ngIf="scTemplate.exoTemplateList.length > 0">Exercices présent dans cette séance:</h3>
     <div
       *ngFor="let exoItem of scTemplate.exoTemplateList; let i = index">
       <app-exo-template-item [index]="i" [exoTemplate]="exoItem" [desactivateRoute]="true"></app-exo-template-item>
@@ -25,8 +26,9 @@
         <button type="button" class="btn btn-primary dropdown-toggle">Manage Seance Template <span
           class="carret"></span></button>
         <ul class="dropdown-menu">
-          <li><a (click)="onEdit()" style="cursor: pointer" >Edit Seance Template </a></li>
+          <li><a (click)="onEdit()" style="cursor: pointer" >Edit Seance Template</a></li>
           <li><a (click)="onDelete()">Delete Seance Template</a></li>
+          <li><a (click)="onSave()">Save Seance Template</a></li>
         </ul>
       </div>
 

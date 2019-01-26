@@ -17,7 +17,7 @@
     <div
       *ngFor="let exoItem of seance.template.exoTemplateList | filterExoList:seance.exercises; let i = index">
       <app-exo-template-item
-        (click)="onAddExercise(i)"
+        (click)="onAddExercise(exoItem)"
         [index]="i"
         [exoTemplate]="exoItem"
         [desactivateRoute]="true"></app-exo-template-item>

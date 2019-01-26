@@ -1,13 +1,10 @@
 import {Seance} from './seance.model';
-import {ScTemplate} from '../template-seance/scTemplate.model';
 import {Subject} from 'rxjs/Subject';
 
 export class SeanceService {
 
   seancesChanged = new Subject<Seance[]>();
-
-  // mock
-  seances: Seance[] = [new Seance(new ScTemplate('Full body', 'Pas le temps de niaser', ''))];
+  seances: Seance[] = [];
 
   constructor() {
   }
@@ -18,6 +15,11 @@ export class SeanceService {
 
   getSeance(index: number) {
     return this.seances[index];
+  }
+
+  setSeances(seance: Seance[]) {
+    this.seances = seance;
+    this.seancesChanged.next(this.seances);
   }
 
   pushSeance(seance: Seance) {

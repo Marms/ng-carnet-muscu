@@ -14,20 +14,15 @@ export class ExoTemplateListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
 
-   constructor(private exoTemplateSvc: ExoTemplateService, private activedRoute: ActivatedRoute, private router: Router) { }
+   constructor(private exoTemplateSvc: ExoTemplateService) { }
 
   ngOnInit() {
     this.subscription = this.exoTemplateSvc.exoTemplateChanged.subscribe(
       (recipes: ExoTemplate[]) => {
         this.exoTemplates = recipes;
-        console.log('subscribes');
       }
     );
     this.exoTemplates = this.exoTemplateSvc.getExoTemplates();
-  }
-
-  onNewExoTemplate() {
-    this.router.navigate(['new'], {relativeTo: this.activedRoute});
   }
 
   ngOnDestroy() {

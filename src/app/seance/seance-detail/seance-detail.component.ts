@@ -3,8 +3,8 @@ import {SeanceService} from '../seance.service';
 import {Seance} from '../seance.model';
 import {ActivatedRoute, Params, Route, Router} from '@angular/router';
 import {Exercise} from '../exercise/exercise.model';
-import {SeanceTemplateService} from '../../template-seance/seance-template.service';
-import {ExoTemplateService} from '../../template-exo/exo-template.service';
+import {ExoTemplate} from '../../template-exo/ExoTemplate.model';
+import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-seance-detail',
@@ -16,9 +16,9 @@ export class SeanceDetailComponent implements OnInit {
   seance: Seance;
   index: number;
 
-  // recuperer l'index de la seance puis recuperer dans service
-  constructor(private seanceSVC: SeanceService, private activeRoute: ActivatedRoute,
-              private router: Router, private templateService: ExoTemplateService) {
+  constructor(private seanceSVC: SeanceService,
+              private activeRoute: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -30,8 +30,8 @@ export class SeanceDetailComponent implements OnInit {
     this.seance = this.seanceSVC.getSeance(+this.activeRoute.snapshot.params['id']);
   }
 
-  onAddExercise(index: number) {
-    const exo = new Exercise(this.templateService.getExoTemplate(index));
+  onAddExercise(template: ExoTemplate) {
+    const exo = new Exercise(template);
     this.seance.exercises.push(exo);
     this.seanceSVC.updateSeance(this.index, this.seance);
     this.onEditExercise(exo.template.name);
@@ -49,5 +49,4 @@ export class SeanceDetailComponent implements OnInit {
     this.seanceSVC.deleteSeance(this.index);
     this.router.navigate(['seances']);
   }
-
 }

@@ -14,6 +14,9 @@ import {Seance} from '../seance.model';
 export class FilterExoSeancePipe implements PipeTransform {
 
   transform(value: ExoTemplate[], seance: Seance) {
+    if (seance.template.exoTemplateList == null) {
+      return value;
+    }
     const arrayObject = this.filterArray(value, seance.template.exoTemplateList);
     const exo = seance.exercises.map(e => e.template);
     return this.filterArray(arrayObject, exo);

@@ -53,8 +53,6 @@ export class ExerciseComponent implements OnInit {
     this.name = name;
     this.seance = this.seanceSvc.getSeance(this.id);
     this.exercise = this.seance.exercises.filter(e => e.template.name === this.name)[0];
-    console.log(this.exercise);
-    console.log(this.seance);
   }
 
   onSubmit() {

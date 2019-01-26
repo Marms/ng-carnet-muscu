@@ -5,19 +5,20 @@ import {ScTemplate} from './scTemplate.model';
 import {ExoTemplate} from '../template-exo/ExoTemplate.model';
 
 export class SeanceTemplateService {
-  inqredientsChanged = new Subject<Ingredient[]>();
   scTemplatesChanged = new Subject<ScTemplate[]>();
   startedEditing = new Subject<number>();
 
 
-  private seanceTemplates: ScTemplate[] = [
-    new ScTemplate('Full body', 'Pas le temps de niaser', ''),
-    new ScTemplate('Jambes Hardcore', 'harcore!!!!', '')
-  ];
+  private seanceTemplates: ScTemplate[] = [];
 
 
   getSeanceTemplates() {
     return this.seanceTemplates;
+  }
+
+  setSeanceTemplates( templates: ScTemplate[]) {
+    this.seanceTemplates = templates;
+    this.scTemplatesChanged.next(this.seanceTemplates);
   }
 
   getSeanceTemplate(index: number) {

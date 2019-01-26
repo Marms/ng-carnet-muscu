@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ExoTemplate } from './ExoTemplate.model';
 import { ExoTemplateService } from './exo-template.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataStorageService} from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-exo-template',
@@ -8,17 +9,20 @@ import { ExoTemplateService } from './exo-template.service';
   styleUrls: ['./exo-template.component.css'],
 })
 export class ExoTemplateComponent implements OnInit {
-  exoTemplateSelected: ExoTemplate;
 
-  constructor(private exoTemplateSvc: ExoTemplateService) { }
+  constructor(private exoTemplateSvc: ExoTemplateService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private dataSvc: DataStorageService) { }
 
   ngOnInit() {
-  /*  this.recipeSvc.exoTemplateSelected.subscribe(
-      (exoTemplate: ExoTemplate) => {
-        this.exoTemplateSelected = exoTemplate;
-      }
+  }
 
-    );*/
+  onSave() {
+    this.dataSvc.onSaveTemplateExo();
+  }
+  onNewExoTemplate() {
+    this.router.navigate(['new'], {relativeTo: this.activatedRoute});
   }
 
 }

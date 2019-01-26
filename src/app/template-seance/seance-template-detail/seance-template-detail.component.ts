@@ -3,6 +3,7 @@ import {ScTemplate} from '../scTemplate.model';
 import {SeanceTemplateService} from '../seance-template.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ExoTemplate} from '../../template-exo/ExoTemplate.model';
+import {DataStorageService} from '../../shared/data-storage.service';
 
 
 @Component({
@@ -15,7 +16,10 @@ export class SeanceTemplateDetailComponent implements OnInit {
   private scTemplate: ScTemplate;
   private index: number;
 
-  constructor(private scTemplSvc: SeanceTemplateService, private router: Router, private activeRoute: ActivatedRoute) {
+  constructor(private scTemplSvc: SeanceTemplateService,
+              private router: Router,
+              private activeRoute: ActivatedRoute,
+              private dataSvc: DataStorageService) {
   }
 
 

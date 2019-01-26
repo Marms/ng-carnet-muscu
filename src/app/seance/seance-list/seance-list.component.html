@@ -1,18 +1,27 @@
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-success"
-      routerLink="./new">
+            routerLink="./new">
       New Seance
     </button>
-
   </div>
 </div>
-
-<div class="ro">
+<hr>
+<div class="row">
   <div class="col-xs-12">
     <app-seance-item
       *ngFor="let item of seances; let i = index"
       [seance]="item" [index]="i"
     ></app-seance-item>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary"
+            (click)="onSave()"
+    >Save All
+    </button>
+
   </div>
 </div>
