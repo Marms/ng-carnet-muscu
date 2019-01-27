@@ -1,5 +1,6 @@
 import {Seance} from './seance.model';
 import {Subject} from 'rxjs/Subject';
+import {Exercise} from './exercise/exercise.model';
 
 export class SeanceService {
 

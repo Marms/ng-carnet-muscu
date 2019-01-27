@@ -1,5 +1,4 @@
-import {OnChanges, Input, ViewChild, Component, OnInit, OnDestroy} from '@angular/core';
-import {Ingredient} from '../../shared/ingredient.model';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import {SeanceTemplateService} from '../seance-template.service';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ScTemplate} from '../scTemplate.model';
@@ -28,6 +27,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.exoTplList = this.exoTemplateSvc.getExoTemplates();
+    console.log(this.exoTplList);
     this.seanceTpl = new ScTemplate('', '', '');
     this.activeRoute.params.subscribe(
       (param: Params) => {
@@ -44,6 +44,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
       this.seanceTpl = this.scService.getSeanceTemplate(this.editItemIndex);
     }
     this.slForm = new FormGroup({
+      'id': new FormControl(this.seanceTpl.id, Validators.required),
       'name': new FormControl(this.seanceTpl.name, Validators.required),
       'comment': new FormControl(this.seanceTpl.comment, Validators.required),
       'exoTemplateList': this.mapExoTemplateListToFormArray(this.seanceTpl.exoTemplateList)
@@ -63,7 +64,8 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
       'name': new FormControl(exo.name),
       'comment': new FormControl(exo.comment),
       'imagePath': new FormControl(exo.imagePath),
-      'type': new FormControl(exo.type)
+      'type': new FormControl(exo.type),
+      'id': new FormControl(exo.id)
     });
   }
 
@@ -72,12 +74,13 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
       group.get('comment').value,
       group.get('imagePath').value,
       group.get('type').value);
+    exoTpl.id = group.get('id').value;
     return exoTpl;
-
   }
 
   addToExoList(exoTpl: ExoTemplate) {
     this.seanceTpl.exoTemplateList.push(exoTpl);
+
     (<FormArray> this.slForm.get('exoTemplateList')).push(this.getFormGroup(exoTpl));
   }
 
@@ -86,6 +89,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.scService.updateSeanceTemplate(this.editItemIndex, value);
     } else {
+      value.id = Date.now();
       this.scService.pushSeanceTemplate(value);
     }
     this.router.navigate(['..'], {relativeTo: this.activeRoute});
@@ -94,7 +98,6 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   onDeleteButton() {
     this.scService.deleteSeanceTemplate(this.editItemIndex);
     this.router.navigate(['/sc-template']);
-
   }
 
   onClearButton() {
@@ -105,9 +108,6 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
     (<FormArray> this.slForm.get('exoTemplateList')).removeAt(index);
   }
 
-  groupToExoTemplate() {
-
-  }
   ngOnDestroy() {
   }
 }

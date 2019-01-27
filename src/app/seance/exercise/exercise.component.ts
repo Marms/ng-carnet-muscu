@@ -29,6 +29,7 @@ export class ExerciseComponent implements OnInit {
     this.initVars();
     this.form = new FormGroup(
       {
+        'id': new FormControl(Date.now()),
         'repetition': new FormControl('', Validators.required),
         'weight': new FormControl('', Validators.required)
       }
@@ -60,7 +61,9 @@ export class ExerciseComponent implements OnInit {
       this.exercise.series[this.idSerie] = this.form.value;
       this.isUpdate = false;
     } else {
-      this.exercise.series.push(this.form.value);
+      const serie = this.form.value;
+      serie.id = Date.now();
+      this.exercise.series.push(serie);
     }
     this.form.reset();
   }
@@ -71,6 +74,7 @@ export class ExerciseComponent implements OnInit {
     const serie = this.exercise.series[index];
     (<FormControl>this.form.get('weight')).setValue(serie.weight);
     (<FormControl>this.form.get('repetition')).setValue(serie.repetition);
+    (<FormControl>this.form.get('id')).setValue(serie.id);
   }
 
   onSave() {

@@ -19,6 +19,7 @@ export class SeanceNewComponent implements OnInit {
 
   ngOnInit() {
     this.scTemplateList = this.scTemplateSvc.getSeanceTemplates();
+    console.log(this.scTemplateList);
   }
 
   selected(index: number) {

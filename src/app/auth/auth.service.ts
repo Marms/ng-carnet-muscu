@@ -1,16 +1,23 @@
 import * as firebase from 'firebase';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class AuthService {
   token: string;
   uid: string;
+  idUserChanged = new Subject<string>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   signupUser(email: string, password: string) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then( (respones) => {
+          this.signinUser(email, password);
+        }
+      )
       .catch(
         error => console.log(error)
       );
@@ -27,7 +34,6 @@ export class AuthService {
       .catch(
         error => console.log(error)
       );
-   console.log(res);
   }
 
   /**
@@ -42,6 +48,7 @@ export class AuthService {
       );
     // il y a une possibilite que le token soit expire
     this.uid = user.uid;
+    this.idUserChanged.next(this.uid);
     return this.token;
   }
 

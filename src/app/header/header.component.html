@@ -11,15 +11,15 @@
           <li routerLinkActive="active"><a [routerLink]="['/seances']" >Seances</a></li>
         </ng-template>
         <ng-template [ngIf]="! authSvc.isAuthentificated()">
-          <li><a [routerLink]="['/signin']">sign in</a></li>
-          <li><a [routerLink]="['/signup']">sign up</a></li>
+          <li><a [routerLink]="['/signin']">Sign in</a></li>
+          <li><a [routerLink]="['/signup']">Register</a></li>
 
         </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
 
         <li *ngIf="authSvc.isAuthentificated()">
-          <a style="cursor: pointer" (click)="onLogOut()">sign out</a>
+          <a style="cursor: pointer" (click)="onLogOut()">Exit</a>
         </li>
         <li *ngIf="authSvc.isAuthentificated()" appDropdown class="dropdown">
             <a style="cursor: pointer" class="dropdown-toggle" role="button">Manage<span class="caret"></span></a>

@@ -1,22 +1,17 @@
-import {Ingredient} from '../shared/ingredient.model';
-import {EventEmitter, OnInit} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {ScTemplate} from './scTemplate.model';
-import {ExoTemplate} from '../template-exo/ExoTemplate.model';
 
 export class SeanceTemplateService {
   scTemplatesChanged = new Subject<ScTemplate[]>();
   startedEditing = new Subject<number>();
 
-
   private seanceTemplates: ScTemplate[] = [];
-
 
   getSeanceTemplates() {
     return this.seanceTemplates;
   }
 
-  setSeanceTemplates( templates: ScTemplate[]) {
+  setSeanceTemplates(templates: ScTemplate[]) {
     this.seanceTemplates = templates;
     this.scTemplatesChanged.next(this.seanceTemplates);
   }

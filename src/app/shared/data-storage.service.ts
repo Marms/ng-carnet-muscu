@@ -7,6 +7,8 @@ import {ScTemplate} from '../template-seance/scTemplate.model';
 import 'rxjs/add/operator/map';
 import {ExoTemplate} from '../template-exo/ExoTemplate.model';
 import {Seance} from '../seance/seance.model';
+import {AuthService} from '../auth/auth.service';
+import {Subscription} from 'rxjs/Subscription';
 
 /**
  * TODO mettre des références ID dans les objects
@@ -14,18 +16,24 @@ import {Seance} from '../seance/seance.model';
  * Reactive web app
  */
 @Injectable()
-export class DataStorageService implements OnInit {
+export class DataStorageService {
 
   url = 'https://weightbook-548ca.firebaseio.com/';
+  userId: string;
+  idSubscriber: Subscription;
 
   constructor(private httpSvc: Http,
               private seanceSvc: SeanceService,
               private templateSeanceSvc: SeanceTemplateService,
-              private templateExoSvc: ExoTemplateService) {
-  }
-
-  ngOnInit() {
-    this.url = 'https://weightbook-548ca.firebaseio.com/';
+              private templateExoSvc: ExoTemplateService,
+              private authSvc: AuthService) {
+    this.userId = this.authSvc.uid;
+    this.idSubscriber = this.authSvc.idUserChanged.subscribe(
+      (uid: string) => {
+        this.userId = uid;
+        this.url = this.url.concat(this.userId).concat('/');
+      }
+    );
   }
 
   fetchAll() {
@@ -41,7 +49,8 @@ export class DataStorageService implements OnInit {
   }
 
   onSaveSeances() {
-    this.httpSvc.put(this.url + 'seances.json', this.seanceSvc.getSeances()).subscribe((response) => {
+    const seances = this.seanceSvc.getSeances();
+    this.httpSvc.put(this.url + 'seances.json', seances).subscribe((response) => {
       console.log(response);
     });
   }
@@ -69,7 +78,8 @@ export class DataStorageService implements OnInit {
 
 
   onSaveTemplateExo() {
-    this.httpSvc.put(this.url + 'template-exercise.json', this.templateExoSvc.getExoTemplates())
+    const exoTemplates = this.templateExoSvc.getExoTemplates();
+    this.httpSvc.put(this.url + 'template-exercises.json', exoTemplates)
 
       .subscribe((response) => {
         console.log(response);
@@ -78,7 +88,7 @@ export class DataStorageService implements OnInit {
   }
 
   onFetchTemplateExo() {
-    this.httpSvc.get(this.url + 'template-exercise.json')
+    this.httpSvc.get(this.url + 'template-exercises.json')
       .map((response: Response) => {
         const templates: ExoTemplate[] = response.json();
         return templates != null ? templates : [];
@@ -91,7 +101,8 @@ export class DataStorageService implements OnInit {
   }
 
   onSaveTemplateSeance() {
-    this.httpSvc.put(this.url + 'template-seances.json', this.templateSeanceSvc.getSeanceTemplates())
+    const templateSeances = this.templateSeanceSvc.getSeanceTemplates();
+    this.httpSvc.put(this.url + 'template-seances.json', templateSeances)
       .subscribe((response) => {
         console.log(response);
       });
@@ -115,7 +126,6 @@ export class DataStorageService implements OnInit {
         this.templateSeanceSvc.setSeanceTemplates(data);
       }
     );
-
-
   }
+
 }
