@@ -35,6 +35,10 @@ import {ExerciseItemComponent} from './seance/exercise/exercise-list/exercise-it
 import {FilterExoListPipe} from './seance/seance-detail/filter-exo-list.pipe';
 import {DataStorageService} from './shared/data-storage.service';
 import {Http, HttpModule} from '@angular/http';
+import {AuthGuard} from './auth/auth-guard';
+import {AuthService} from './auth/auth.service';
+import {SigninComponent} from './auth/signin/signin.component';
+import {SignupComponent} from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,9 @@ import {Http, HttpModule} from '@angular/http';
     ExerciseComponent,
     ExerciseListComponent,
     ExerciseItemComponent,
-    FilterExoListPipe
+    FilterExoListPipe,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,7 @@ import {Http, HttpModule} from '@angular/http';
     AppRoutingModule,
     HttpModule
   ],
-  providers: [SeanceTemplateService, ExoTemplateService, SeanceService, DataStorageService],
+  providers: [SeanceTemplateService, ExoTemplateService, SeanceService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

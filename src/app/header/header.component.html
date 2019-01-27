@@ -5,12 +5,23 @@
     </div>
     <div class="navbar-default">
       <ul class="nav  navbar-nav">
-        <li routerLinkActive="active"><a [routerLink]="['/exo-template']" >Exercice Template</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/sc-template']" >Seance Template</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['/seances']" >Seances</a></li>
+        <ng-template [ngIf]="authSvc.isAuthentificated()" >
+          <li routerLinkActive="active"><a [routerLink]="['/exo-template']" >Exercice Template</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['/sc-template']" >Seance Template</a></li>
+          <li routerLinkActive="active"><a [routerLink]="['/seances']" >Seances</a></li>
+        </ng-template>
+        <ng-template [ngIf]="! authSvc.isAuthentificated()">
+          <li><a [routerLink]="['/signin']">sign in</a></li>
+          <li><a [routerLink]="['/signup']">sign up</a></li>
+
+        </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li appDropdown class="dropdown">
+
+        <li *ngIf="authSvc.isAuthentificated()">
+          <a style="cursor: pointer" (click)="onLogOut()">sign out</a>
+        </li>
+        <li *ngIf="authSvc.isAuthentificated()" appDropdown class="dropdown">
             <a style="cursor: pointer" class="dropdown-toggle" role="button">Manage<span class="caret"></span></a>
             <ul class="dropdown-menu" #menu>
             <li><a style="cursor: pointer" (click)="onSave()">Save Data</a></li>
