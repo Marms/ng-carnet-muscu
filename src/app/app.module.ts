@@ -39,6 +39,7 @@ import {AuthGuard} from './auth/auth-guard';
 import {AuthService} from './auth/auth.service';
 import {SigninComponent} from './auth/signin/signin.component';
 import {SignupComponent} from './auth/signup/signup.component';
+import {BsDatepickerModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -70,14 +71,15 @@ import {SignupComponent} from './auth/signup/signup.component';
     ExerciseItemComponent,
     FilterExoListPipe,
     SigninComponent,
-    SignupComponent
-  ],
+    SignupComponent],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    BsDatepickerModule.forRoot()
+
   ],
   providers: [SeanceTemplateService, ExoTemplateService, SeanceService, DataStorageService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
