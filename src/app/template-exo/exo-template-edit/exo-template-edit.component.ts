@@ -15,6 +15,16 @@ export class ExoTemplateEditComponent implements OnInit {
   editMode: boolean;
   form: FormGroup;
 
+  types = [
+    {id: 1, name: 'PECTORAUX'},
+    {id: 2, name: 'DOS'},
+    {id: 3, name: 'JAMBES'},
+    {id: 4, name: 'ABDO'},
+    {id: 5, name: 'BRAS'},
+    {id: 6, name: 'MOLLETS'}
+  ];
+
+
   constructor(private route: ActivatedRoute, private router: Router, private recipeSvc: ExoTemplateService) {
 
   }
@@ -31,12 +41,21 @@ export class ExoTemplateEditComponent implements OnInit {
 
   initForm() {
     const exoTemplate: ExoTemplate = this.getExoTemplate();
-
+    const formControls = this.types.map(control => new FormControl(this.isSelected(control, exoTemplate.type)));
     this.form = new FormGroup({
       'name': new FormControl(exoTemplate.name, Validators.required),
       'imagePath': new FormControl(exoTemplate.imagePath, Validators.required),
       'comment': new FormControl(exoTemplate.comment, Validators.required),
+      'types': new FormArray(formControls)
     });
+  }
+
+  isSelected(o: { id: number, name: string }, type: string[]) {
+    if (null === type || type === undefined) {
+      return false;
+    }
+    return type.includes(o.name) ? true : false;
+
   }
 
   onCancel() {
@@ -45,6 +64,10 @@ export class ExoTemplateEditComponent implements OnInit {
 
   onSubmit() {
     const exo: ExoTemplate = this.form.value;
+    exo.type = this.form.value.types
+      .map((checked, index) => checked ? this.types[index].name : null)
+      .filter(value => value !== null);
+
     if (this.editMode) {
       this.recipeSvc.updateExoTemplate(this.id, exo);
     } else {
