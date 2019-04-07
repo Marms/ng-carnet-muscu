@@ -3,6 +3,34 @@
     <img src="{{seance.template.imagePath}}" alt="" class="img-responsive">
   </div>
 </div>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div class="form-row">
+      <label for="date">Date</label>
+      <input type="text"
+             id="date"
+             placeholder="Datepicker"
+             class="form-control"
+             bsDatepicker
+             formControlName="date"
+             value = "{{date| date: 'yyyy-MM-ddTHH:mm:ss'}}"
+             [bsConfig]="{ dateInputFormat: 'YYYY-MM-dd HH:mm:ss' }"
+      >
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-row">
+      <label for="date">Name</label>
+      <input type="text"
+             id="name"
+             class="form-control"
+             formControlName="name"      >
+    </div>
+  </div>
+</form>
+
+
 <div class="row">
   <div class="col-xs-12">
     <h1>{{seance.template.name}}</h1>
@@ -44,6 +72,7 @@
         class="carret"></span></button>
       <ul class="dropdown-menu">
         <li><a (click)="onEdit()" style="cursor: pointer">Edit Seance</a></li>
+        <li><a (click)="onSave()" style="cursor: pointer">Save Seance</a></li>
         <li><a (click)="onDelete()">Delete Seance</a></li>
       </ul>
     </div>

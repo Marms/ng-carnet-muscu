@@ -1,4 +1,4 @@
-import { Output, EventEmitter, Component, OnInit } from '@angular/core';
+import {Output, EventEmitter, Component, OnInit} from '@angular/core';
 import {DataStorageService} from '../shared/data-storage.service';
 import {AuthService} from '../auth/auth.service';
 
@@ -9,10 +9,15 @@ import {AuthService} from '../auth/auth.service';
   styles: ['']
 
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   constructor(private dataSvc: DataStorageService,
-              private authSvc: AuthService) {}
+              private authSvc: AuthService) {
+  }
+
+  ngOnInit(): void {
+    this.onFetch();
+  }
 
   onSave() { //
     this.dataSvc.saveAll();

@@ -10,7 +10,7 @@ export class SeanceService {
   constructor() {
   }
 
-  getSeances() {
+  getSeances(): Seance[] {
     return this.seances.slice();
   }
 
