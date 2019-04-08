@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {SeanceService} from '../seance.service';
 import {Seance} from '../seance.model';
@@ -6,6 +6,7 @@ import {ExoTemplateService} from '../../template-exo/exo-template.service';
 import {ExoTemplate} from '../../template-exo/ExoTemplate.model';
 import {Exercise} from '../exercise/exercise.model';
 import {SeanceTemplateService} from '../../template-seance/seance-template.service';
+import {Type} from '../../template-seance/seance-template-edit/type.model';
 
 @Component({
   selector: 'app-seance-edit',
@@ -16,10 +17,26 @@ export class SeanceAddExercicesComponent implements OnInit {
 
   seance: Seance;
   exercicesTemplates: ExoTemplate[];
+
+
+  types = [
+    new Type(1, 'PECTORAUX', true, 'primary'),
+    new Type(3, 'JAMBES', true, 'success'),
+    new Type(4, 'ABDO', true, 'warning'),
+    new Type(5, 'BRAS', true, 'danger'),
+    new Type(2, 'DOS', true, 'primary'),
+    new Type(6, 'MOLLETS', true, 'info'),
+    new Type(7, 'EPAULES', true, 'warning')
+  ];
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
               private exoTemplateSvc: ExoTemplateService,
               private seanceSvc: SeanceService,
               private scSvc: SeanceTemplateService) {
+  }
+
+  checked(index: number) {
+    this.types[index].checked = !this.types[index].checked;
   }
 
   ngOnInit() {
@@ -37,7 +54,7 @@ export class SeanceAddExercicesComponent implements OnInit {
   }
 
   selected(name: string) {
-    const exo = new Exercise(this.exercicesTemplates.filter(e => e.name === name )[0]);
+    const exo = new Exercise(this.exercicesTemplates.filter(e => e.name === name)[0]);
     this.seance.exercises.push(exo);
     this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }

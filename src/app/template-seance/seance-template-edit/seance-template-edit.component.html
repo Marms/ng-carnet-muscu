@@ -37,9 +37,10 @@
       </div>
       <div class="col-xs-12">
         <div class="form-group">
-          <label for="type" *ngFor="let type of types; let i = index">
-            <input type="checkbox" id="type" [checked]="type.checked" (click)="checked(i)">
+          <label for="type" *ngFor="let type of types; let i = index" (click)="check(inp, i)">
+            <input type="checkbox" id="type" [(checked)]="type.checked"#inp>
             {{types[i].name}}
+
           </label>
         </div>
       </div>

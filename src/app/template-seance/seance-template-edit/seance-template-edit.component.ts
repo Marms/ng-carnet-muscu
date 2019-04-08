@@ -21,17 +21,21 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   exoTplList: ExoTemplate[];
 
   types = [
-    new Type(1, 'PECTORAUX', true),
-    new Type(2, 'DOS', true),
-    new Type(3, 'JAMBES', true),
-    new Type(4, 'ABDO', true),
-    new Type(5, 'BRAS', true),
-    new Type(6, 'MOLLETS', true),
-    new Type(7, 'EPAULES', true)
+    new Type(1, 'PECTORAUX', true, 'btn-primary'),
+    new Type(2, 'JAMBES', true, 'btn-success'),
+    new Type(3, 'ABDO', true, 'btn-warning'),
+    new Type(4, 'BRAS', true, 'btn-danger'),
+    new Type(5, 'DOS', true, 'btn-primary'),
+    new Type(6, 'MOLLETS', true, 'btn-info'),
+    new Type(7, 'EPAULES', true, 'btn-warning')
   ];
 
-  checked(i: number) {
+
+
+  check(inp: HTMLInputElement, i : number) {
+    inp.checked = true;
     this.types[i].checked = !this.types[i].checked;
+
   }
 
   constructor(private exoTemplateSvc: ExoTemplateService,

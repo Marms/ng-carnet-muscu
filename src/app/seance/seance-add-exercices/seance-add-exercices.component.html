@@ -1,9 +1,16 @@
 
 <h2>Add Exercice to seance {{seance.name}}</h2>
+<div class="col-xs-12">
+    <label for="type" *ngFor="let type of types; let i = index">
+      <input type="checkbox" id="type" [checked]="type.checked" (click)="checked(i)">
+      {{types[i].name}}
+    </label>
+
+</div>
 <div class="row">
   <div class="col-xs-12">
 
-    <div *ngFor="let exo of exercicesTemplates | filterExoTemplate:seance; let i = index"
+    <div *ngFor="let exo of exercicesTemplates | filterByType:types | filterExoTemplate:seance; let i = index"
     >
       <app-exo-template-item [index]="i"
                              [exoTemplate]="exo"
