@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
+
     <form [formGroup]="slForm" (ngSubmit)="onSubmitItem()">
       <div class="row">
         <div class="col-xs-12">
@@ -34,6 +35,14 @@
           ></textarea>
         </div>
       </div>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="type" *ngFor="let type of types; let i = index">
+            <input type="checkbox" id="type" [checked]="type.checked" (click)="checked(i)">
+            {{types[i].name}}
+          </label>
+        </div>
+      </div>
       <div class="row" formArrayName="exoTemplateList"
            *ngFor="let exoItem of slForm.get('exoTemplateList').controls; let i = index"
       >
@@ -50,12 +59,12 @@
         </div>
       </div>
     </form>
-    <!-- afficher la liste des exercices avec un Pipe qui n'affiche pas le l'exo présent dans scTemplate-->
+    <!-- afficher la liste des exercices avec un Pipe qui n'affiche pas l'exo présent dans scTemplate-->
 
     <div class="row">
       <div class="col-xs-12">
         <div class="row"
-             *ngFor="let exoTpl of exoTplList | filterByName:slForm.get('exoTemplateList'); let i=index"
+             *ngFor="let exoTpl of exoTplList | filterByType:types| filterByName:slForm.get('exoTemplateList'); let i=index"
         >
           <div class="col-xs-10">
             <app-exo-template-item [exoTemplate]="exoTpl" [index]="i" [desactivateRoute]="true"></app-exo-template-item>

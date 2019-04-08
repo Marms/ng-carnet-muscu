@@ -40,6 +40,7 @@ import {AuthService} from './auth/auth.service';
 import {SigninComponent} from './auth/signin/signin.component';
 import {SignupComponent} from './auth/signup/signup.component';
 import {BsDatepickerModule} from 'ngx-bootstrap';
+import {FilterByTypePipe} from './template-seance/seance-template-edit/filter-by-type.pipe';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {BsDatepickerModule} from 'ngx-bootstrap';
     ExerciseItemComponent,
     FilterExoListPipe,
     SigninComponent,
-    SignupComponent],
+    SignupComponent,
+    FilterByTypePipe],
   imports: [
     BrowserModule,
     FormsModule,

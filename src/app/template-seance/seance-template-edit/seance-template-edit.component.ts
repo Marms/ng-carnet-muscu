@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {SeanceTemplateService} from '../seance-template.service';
 import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ScTemplate} from '../scTemplate.model';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ExoTemplate} from '../../template-exo/ExoTemplate.model';
 import {ExoTemplateService} from '../../template-exo/exo-template.service';
+import {Type} from './type.model';
 
 
 @Component({
@@ -19,6 +20,20 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   seanceTpl: ScTemplate;
   exoTplList: ExoTemplate[];
 
+  types = [
+    new Type(1, 'PECTORAUX', true),
+    new Type(2, 'DOS', true),
+    new Type(3, 'JAMBES', true),
+    new Type(4, 'ABDO', true),
+    new Type(5, 'BRAS', true),
+    new Type(6, 'MOLLETS', true),
+    new Type(7, 'EPAULES', true)
+  ];
+
+  checked(i: number) {
+    this.types[i].checked = !this.types[i].checked;
+  }
+
   constructor(private exoTemplateSvc: ExoTemplateService,
               private scService: SeanceTemplateService,
               private router: Router,
@@ -27,7 +42,6 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.exoTplList = this.exoTemplateSvc.getExoTemplates();
-    console.log(this.exoTplList);
     this.seanceTpl = new ScTemplate('', '', '');
     this.activeRoute.params.subscribe(
       (param: Params) => {
@@ -81,7 +95,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   addToExoList(exoTpl: ExoTemplate) {
     this.seanceTpl.exoTemplateList.push(exoTpl);
 
-    (<FormArray> this.slForm.get('exoTemplateList')).push(this.getFormGroup(exoTpl));
+    (<FormArray>this.slForm.get('exoTemplateList')).push(this.getFormGroup(exoTpl));
   }
 
   onSubmitItem() {
@@ -105,7 +119,7 @@ export class SeanceTemplateEditComponent implements OnInit, OnDestroy {
   }
 
   removeItem(index: number) {
-    (<FormArray> this.slForm.get('exoTemplateList')).removeAt(index);
+    (<FormArray>this.slForm.get('exoTemplateList')).removeAt(index);
   }
 
   ngOnDestroy() {
