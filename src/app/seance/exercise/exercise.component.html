@@ -10,20 +10,81 @@
 </div>
 
 <hr/>
+
 <div class="row">
   <div class="col-xs-12">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <div class="form-row">
-          <label for="nbrepeat" class="control-label">Nombre de répetition:</label>
-          <input id="nbrepeat" type="text" class="form-control" formControlName="repetition">
+          <label for="notation" class="control-label">Type notation:</label>
+          <select formControlName="notation" name="type" id="notation" class="form-control">
+            <option value="NORMAL" selected>Normal</option>
+            <option value="PDC">PDC</option>
+            <option value="TRACTION">Traction</option>
+            <option value="TIME">Time</option>
+          </select>
         </div>
       </div>
-
-      <div class="form-group">
+      <div class="form-group" *ngIf="showInput('repetition')">
         <div class="form-row">
-          <label for="poids" class="control-label">Poids:</label>
-          <input id="poids" type="text" class="form-control" formControlName="weight">
+          <label for="nbrepeat" class="control-label">Nombre de répetition:</label>
+          <input id="nbrepeat" type="number" step="0.5" class="form-control" formControlName="repetition">
+        </div>
+      </div>
+      <div class="form-group" *ngIf="showInput('weight')">
+        <div class="form-row">
+          <label for="poids" class="control-label"><span >Poids:</span><span>Leste:</span></label>
+          <input id="poids" type="number" step="0.5" class="form-control" formControlName="weight">
+        </div>
+      </div>
+      <div *ngIf="showInput('negative')">
+        <div class="form-group">
+          <div class="form-row">
+            <label>Negative:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            False:
+            <input type="radio" formControlName="negative" value="false" checked>
+            True:
+            <input type="radio" formControlName="negative" value="true">
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="showInput('force')">
+        <div class="form-group">
+          <div class="form-row">
+            <label>Force:</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-row">
+            False:
+            <input type="radio" id="false" formControlName="force" value="false">
+            True:
+            <input type="radio" id="true" formControlName="force" value="true">
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group" *ngIf="showInput('comment')">
+        <div class="form-row">
+          <label for="comment" class="control-label">Commentaire:</label>
+          <input id="comment" type="text" class="form-control" formControlName="comment">
+        </div>
+      </div>
+      <div class="form-group" *ngIf="showInput('minute')">
+        <div class="form-row">
+          <label for="minute" class="control-label">Minute:</label>
+          <input id="minute" type="number" step="1" class="form-control" formControlName="minute">
+        </div>
+      </div>
+      <div class="form-group" *ngIf="showInput('seconde')">
+        <div class="form-row">
+          <label for="seconde" class="control-label">Seconde:</label>
+          <input id="seconde" type="number" step="1" class="form-control" formControlName="seconde">
         </div>
       </div>
       <div class="form-row">
