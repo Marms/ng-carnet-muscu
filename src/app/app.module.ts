@@ -44,6 +44,7 @@ import {FilterByTypePipe} from './template-seance/seance-template-edit/filter-by
 import { HistoricalComponent } from './seance/exercise/historical/historical.component';
 import { HistItemComponent } from './seance/exercise/historical/hist-item/hist-item.component';
 import { SerieComponent } from './seance/exercise/serie/serie.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { SerieComponent } from './seance/exercise/serie/serie.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ChartsModule
 
   ],
   providers: [SeanceTemplateService, ExoTemplateService, SeanceService, DataStorageService, AuthService, AuthGuard],

@@ -1,5 +1,18 @@
 
-<h2>Old Exercises</h2>
+<h2> Total </h2>
+<div style="display: block;">
+  <canvas baseChart width="400" height="200"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+  </canvas>
+</div>
+
+<h2>Details old exercise</h2>
 <div *ngFor="let exo of exercices; let i = index">
   <div class="row">
     <app-hist-item

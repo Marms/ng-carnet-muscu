@@ -11,7 +11,9 @@ export class HistItemComponent implements OnInit {
   @Input('exo') exercise: Exercise;
   @Input('index') index: number;
   @Input('date') date: Date;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
