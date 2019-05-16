@@ -1,0 +1,11 @@
+
+<h2>Old Exercises</h2>
+<div *ngFor="let exo of exercices; let i = index">
+  <div class="row">
+    <app-hist-item
+      [exo]="exo" [index]="i"
+    >
+    </app-hist-item>
+  </div>
+  <hr/>
+</div>

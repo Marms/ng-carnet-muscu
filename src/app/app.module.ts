@@ -41,6 +41,9 @@ import {SigninComponent} from './auth/signin/signin.component';
 import {SignupComponent} from './auth/signup/signup.component';
 import {BsDatepickerModule} from 'ngx-bootstrap';
 import {FilterByTypePipe} from './template-seance/seance-template-edit/filter-by-type.pipe';
+import { HistoricalComponent } from './seance/exercise/historical/historical.component';
+import { HistItemComponent } from './seance/exercise/historical/hist-item/hist-item.component';
+import { SerieComponent } from './seance/exercise/serie/serie.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,10 @@ import {FilterByTypePipe} from './template-seance/seance-template-edit/filter-by
     FilterExoListPipe,
     SigninComponent,
     SignupComponent,
-    FilterByTypePipe],
+    FilterByTypePipe,
+    HistoricalComponent,
+    HistItemComponent,
+    SerieComponent],
   imports: [
     BrowserModule,
     FormsModule,

@@ -102,13 +102,16 @@
         routerLinkActive="active"
         style="cursor: pointer"
         class="list-group-item clearfix">
-        <div class="pull-left">
-          <p class="list-group-item-text">{{serie.repetition}} * {{serie.weight}} KG</p>
-        </div>
+          <app-serie [serie]="serie"></app-serie>
         <span class="pull-right">
-    </span>
+        </span>
       </a>
     </div>
   </div>
 </div>
 <hr/>
+
+<div class="row">
+  <app-historical></app-historical>
+
+</div>

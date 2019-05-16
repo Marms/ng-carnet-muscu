@@ -52,7 +52,6 @@ export class ExerciseComponent implements OnInit {
         'comment': new FormControl('', Validators.required),
         'minute': new FormControl('', Validators.required),
         'seconde': new FormControl('', Validators.required)
-
       }
     );
   }

@@ -11,9 +11,17 @@ export class SeanceItemComponent implements OnInit {
   @Input('seance') seance: Seance;
   @Input('index') index: number;
 
-  constructor() { }
+  name: string;
+
+  constructor() {
+  }
 
   ngOnInit() {
+    if (this.seance.name !== null) {
+      this.name = this.seance.name;
+    } else {
+      this.name = this.seance.template.name;
+    }
   }
 
 }
