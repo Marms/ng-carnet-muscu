@@ -1,4 +1,8 @@
 <div class="pull-left">
 
-  <p class="list-group-item-text">{{serie.repetition}} * {{serie.weight}} KG</p>
+  <p *ngIf="serie.notation == 'NORMAL'" class="list-group-item-text">{{serie.repetition}} * {{serie.weight}} KG</p>
+  <p *ngIf="serie.notation == 'PDC'" class="list-group-item-text">{{serie.repetition}} PDC</p>
+  <p *ngIf="serie.notation == 'TIME'" class="list-group-item-text">{{serie.minute}}min {{serie.seconde}} sec</p>
+  <p *ngIf="serie.notation == 'Traction'" class="list-group-item-text">{{serie.repetition}} PDC </p>
+
 </div>

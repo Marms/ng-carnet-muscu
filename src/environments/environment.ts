@@ -7,7 +7,4 @@ export const environment = {
   production: false,
   datastorage: 'https://weightbook-548ca.firebaseio.com/',
   firebase: 'https://weightbook-548ca.firebaseio.com/'
-
-
 };
-g
