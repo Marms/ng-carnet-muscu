@@ -9,6 +9,7 @@ import {ExoTemplate} from '../template-exo/ExoTemplate.model';
 import {Seance} from '../seance/seance.model';
 import {AuthService} from '../auth/auth.service';
 import {Subscription} from 'rxjs/Subscription';
+import {environment} from '../../environments/environment';
 
 /**
  * TODO mettre des références ID dans les objects
@@ -18,7 +19,9 @@ import {Subscription} from 'rxjs/Subscription';
 @Injectable()
 export class DataStorageService {
 
-  url = 'https://weightbook-548ca.firebaseio.com/';
+  url =  environment.datastorage;
+  urlFirebase = environment.firebase;
+
   userId: string;
   idSubscriber: Subscription;
 
@@ -32,6 +35,7 @@ export class DataStorageService {
       (uid: string) => {
         this.userId = uid;
         this.url = this.url.concat(this.userId).concat('/');
+        this.urlFirebase = this.urlFirebase.concat(this.userId).concat('/');
       }
     );
   }
@@ -50,7 +54,7 @@ export class DataStorageService {
 
   onSaveSeances() {
     const seances = this.seanceSvc.getSeances();
-    this.httpSvc.put(this.url + 'seances.json', seances).subscribe((response) => {
+    this.httpSvc.put(this.urlFirebase + 'seances.json', seances).subscribe((response) => {
       console.log(response);
     });
   }
@@ -79,7 +83,7 @@ export class DataStorageService {
 
   onSaveTemplateExo() {
     const exoTemplates = this.templateExoSvc.getExoTemplates();
-    this.httpSvc.put(this.url + 'template-exercises.json', exoTemplates)
+    this.httpSvc.put(this.urlFirebase + 'template-exercises.json', exoTemplates)
 
       .subscribe((response) => {
         console.log(response);
@@ -102,7 +106,7 @@ export class DataStorageService {
 
   onSaveTemplateSeance() {
     const templateSeances = this.templateSeanceSvc.getSeanceTemplates();
-    this.httpSvc.put(this.url + 'template-seances.json', templateSeances)
+    this.httpSvc.put(this.urlFirebase + 'template-seances.json', templateSeances)
       .subscribe((response) => {
         console.log(response);
       });
